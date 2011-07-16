@@ -3,7 +3,7 @@
 $HOST_w = "localhost"; // <--- 99% chance you will not need to change this
 $USER_w = "root"; // <--- DB Username
 $PASS_w = ""; // <--- DB Password
-$DATAB_w = ""; // <--- The Database name
+$DATAB_w = "skoot"; // <--- The Database name
 
 // Time Zone Settings for PHP 5.3 users
 $TimeZone = 'America/Chicago';
