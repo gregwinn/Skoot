@@ -29,6 +29,7 @@ class db {
 	var $update = array();
 	var $delete = array();
 	var $order = '';
+	var $sql = '';
 	
 	function db(){
 		if ($dbc = @mysql_connect (DBHOST, DBUSER, DBPASS) ) {
@@ -48,6 +49,7 @@ class db {
     	$this->insert = array();
     	$this->update = array();
 		$this->delete = array();
+		$this->sql = '';
 		$this->order = '';
     	$this->select = '';
 		$this->delete = '';
@@ -93,6 +95,11 @@ class db {
 	    $this->updateTable = $table;
 	    return $this;
 	}
+
+	function sql($val){
+		$this->sql = $val;
+		return $this;
+	}
 	
 	function delete($table){
 	    $this->deleteTable = $table;
@@ -129,6 +136,8 @@ class db {
 		    return $this->getInsert();
 		}elseif(!empty($this->updateTable)){
 		    return $this->getUpdate();
+		}elseif(!empty($this->sql)) {
+			return $this->real_sql();
 		}else{
 		    return FALSE;
 		}
@@ -206,6 +215,10 @@ class db {
 			$cw++;
 		}
 		return $whereQ;
+	}
+
+	private function real_sql(){
+		return mysql_query($this->sql);
 	}
 	
 	private function checkforerror($q){
